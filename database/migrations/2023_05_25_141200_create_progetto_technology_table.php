@@ -17,11 +17,11 @@ return new class extends Migration {
             //$table->timestamps();
 
             $table->unsignedBigInteger('progetto_id');
-            $table->foreign('progetto_id')->references('id')->on('progetti')->onDelete('CASCADE');
+            $table->foreign('progetto_id')->references('id')->on('progettos')->onDelete('CASCADE');
 
 
-            $table->unsignedBigInteger('tecnology_id');
-            $table->foreign('tecnology_id')->references('id')->on('tecnologies')->onDelete('CASCADE');
+            $table->unsignedBigInteger('technology_id');
+            $table->foreign('technology_id')->references('id')->on('technologies')->onDelete('CASCADE');
         });
     }
 
@@ -32,6 +32,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('progetto_technology');
+        Schema::dropIfExists('progettos_technology');
     }
 };
