@@ -26,7 +26,9 @@ class UpdateProgettoRequest extends FormRequest
         return [
             'title' => 'required|max:150|unique:progettos',
             'cover_image' => 'nullable|max:255|url',
-            'content' => 'nullable'
+            'content' => 'nullable',
+            'types_id' => 'nullable|exists:types,id',
+            'technologies' => 'exists:technologies,id'
         ];
     }
 }

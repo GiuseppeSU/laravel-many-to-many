@@ -85,7 +85,8 @@ class ProgettoController extends Controller
     public function edit(Progetto $progetto)
     {
         $types = Type::all();
-        return view('admin.progetti.edit', compact('progetto', 'types'));
+        $technologies = Technology::all();
+        return view('admin.progetti.edit', compact('progetto', 'types', 'technologies'));
     }
 
     /**
@@ -105,6 +106,8 @@ class ProgettoController extends Controller
         if ($checkProgetto) {
             return back()->withInput()->withErrors(['slug' => 'Impossibile creare lo slug']);
         }
+
+        $progetto->technologies()->sync($request->technologies);
 
         $progetto->update($validated_data);
         return redirect()->route('admin.progetti.show', ['progetto' => $progetto->slug])->with('status', 'Post modificato con successo!');
