@@ -60,10 +60,10 @@
             @foreach ($technologies as $technology)
                 @if ($errors->any())
                     <input id="technology_{{ $technology->id }}" @if (in_array($technology->id, old('technologies', []))) checked @endif
-                        type="checkbox" name="technologys[]" value="{{ $technology->id }}">
+                        type="checkbox" name="technology[]" value="{{ $technology->id }}">
                 @else
                     <input id="technology_{{ $technology->id }}" @if ($progetto->technologies->contains($technology->id)) checked @endif
-                        type="checkbox" name="technologys[]" value="{{ $technology->id }}">
+                        type="checkbox" name="technology[]" value="{{ $technology->id }}">
                 @endif
 
                 <label for="technology_{{ $technology->id }}" class="form-label">{{ $technology->name }}</label>

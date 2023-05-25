@@ -60,9 +60,9 @@
 
         <div class="mb-3">
             @foreach ($technologies as $technology)
-                <input id="technology_{{ $technology->id }}" @if (in_array($technology->id, old('technologies', []))) checked @endif
-                    type="checkbox" name="technologys[]" value="{{ $technology->id }}">
-                <label for="technology_{{ $technology->id }}" class="form-label">{{ $technology->name }}</label>
+                <input id="technology{{ $technology->id }}" @if (in_array($technology->id, old('technologies', []))) checked @endif
+                    type="checkbox" name="technologies[]" value="{{ $technology->id }}">
+                <label for="technologies{{ $technology->id }}" class="form-label">{{ $technology->name }}</label>
                 <br>
             @endforeach
             @error('technologies')

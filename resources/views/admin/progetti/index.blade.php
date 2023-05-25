@@ -11,6 +11,7 @@
                 <th scope="col">Titolo</th>
                 <th scope="col">Slug</th>
                 <th scope="col">Categoria</th>
+                <th scope="col">Tecnologies</th>
                 <th scope="col">Azioni</th>
             </tr>
         </thead>
@@ -21,6 +22,12 @@
                     <td>{{ $progetto->title }}</td>
                     <td>{{ $progetto->slug }}</td>
                     <td>{{ $progetto->type ? $progetto->type->name : 'Nessun tipo abbinato' }}</td>
+                    <td>
+                        @foreach ($progetto->technologies as $technology)
+                            {{ $technology->name }}
+                        @endforeach
+
+                    </td>
                     <td>
                         <a class="btn btn-primary" href="{{ route('admin.progetti.show', $progetto->slug) }}">VEDI</a>
                         <a class="btn btn-warning" href="{{ route('admin.progetti.edit', $progetto->slug) }}">MODIFICA</a>

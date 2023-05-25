@@ -100,9 +100,7 @@ class ProgettoController extends Controller
     {
         $validated_data = $request->validated();
         $validated_data['slug'] = Progetto::generateSlug($request->title);
-
         $checkProgetto = Progetto::where('slug', $validated_data['slug'])->where('id', '<>', $progetto->id)->first();
-
         if ($checkProgetto) {
             return back()->withInput()->withErrors(['slug' => 'Impossibile creare lo slug']);
         }
