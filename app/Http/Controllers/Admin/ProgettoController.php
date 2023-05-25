@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProgettoRequest;
 use App\Http\Requests\UpdateProgettoRequest;
 use App\Models\Progetto;
+use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Http\Request;
 
@@ -32,7 +33,8 @@ class ProgettoController extends Controller
     public function create()
     {
         $types = Type::all();
-        return view('admin.progetti.create', compact('types'));
+        $technologies = Technology::all();
+        return view('admin.progetti.create', compact('types', 'technologies'));
     }
 
     /**
@@ -43,18 +45,22 @@ class ProgettoController extends Controller
      */
     public function store(StoreProgettoRequest $request)
     {
+
+
+
+
         $validated_data = $request->validated();
-
         $validated_data['slug'] = Progetto::generateSlug($request->title);
-
-
         $checkProgetto = Progetto::where('slug', $validated_data['slug'])->first();
         if ($checkProgetto) {
             return back()->withInput()->withErrors(['slug' => 'Impossibile creare lo slug per questo post, cambia il titolo']);
         }
-
-
         $newProgetto = Progetto::create($validated_data);
+        if ($request->has('technologies')) {
+            $newProgetto->technologies()->attach($request->technologies);
+
+        }
+
 
         return redirect()->route('admin.progetti.show', ['progetto' => $newProgetto->slug])->with('status', 'Post creato con successo!');
     }

@@ -57,6 +57,18 @@
             @enderror
         </div>
 
+
+        <div class="mb-3">
+            @foreach ($technologies as $technology)
+                <input id="technology_{{ $technology->id }}" type="checkbox" name="technologys[]"
+                    value="{{ $technology->id }}">
+                <label for="technology_{{ $technology->id }}" class="form-label">{{ $technology->name }}</label>
+                <br>
+            @endforeach
+
+
+        </div>
+
         <button type="submit" class="btn btn-primary">Salva</button>
 
     </form>
