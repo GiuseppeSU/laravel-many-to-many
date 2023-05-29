@@ -139,7 +139,27 @@ class ProgettoController extends Controller
      */
     public function destroy(Progetto $progetto)
     {
+
+        if ($progetto->cover_image) {
+            Storage::delete($progetto->cover_image);
+        }
         $progetto->delete();
         return redirect()->route('admin.progetti.index');
+    }
+
+
+    public function deleteImage($slug)
+    {
+
+        $progetto = Progetto::where('slug', $slug)->firstOrFail();
+
+        if ($progetto->cover_image) {
+            Storage::delete($progetto->cover_image);
+            $progetto->cover_image = null;
+            $progetto->save();
+        }
+
+        return redirect()->route('admin.progetti.edit', $progetto->slug);
+
     }
 }

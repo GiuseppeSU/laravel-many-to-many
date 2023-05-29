@@ -4,7 +4,8 @@
 
 @section('content')
 
-    <form method="POST" action="{{ route('admin.progetti.update', ['progetto' => $progetto->slug]) }}">
+    <form method="POST" action="{{ route('admin.progetti.update', ['progetto' => $progetto->slug]) }}"
+        enctype="multipart/form-data">
 
         @csrf
         @method('PUT')
