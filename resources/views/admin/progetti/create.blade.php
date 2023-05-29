@@ -22,7 +22,7 @@
         <div class="mb-3">
             <label for="cover_image" class="form-label">Seleziona Immagine</label>
             <input type="file" class="form-control @error('cover_image') is-invalid @enderror " id="cover_image"
-                name="cover_image" value="{{ old('cover_image') }}">
+                name="cover_image">
             @error('cover_image')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -60,8 +60,8 @@
 
         <div class="mb-3">
             @foreach ($technologies as $technology)
-                <input id="technology{{ $technology->id }}" @if (in_array($technology->id, old('technologies', []))) checked @endif
-                    type="checkbox" name="technologies[]" value="{{ $technology->id }}">
+                <input id="technology{{ $technology->id }}" @if (in_array($technology->id, old('technologies', []))) checked @endif type="checkbox"
+                    name="technologies[]" value="{{ $technology->id }}">
                 <label for="technologies{{ $technology->id }}" class="form-label">{{ $technology->name }}</label>
                 <br>
             @endforeach

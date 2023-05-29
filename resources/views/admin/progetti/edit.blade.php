@@ -21,9 +21,13 @@
         </div>
 
         <div class="mb-3">
-            <label for="cover_image" class="form-label">Cover url</label>
-            <input type="text" class="form-control @error('cover_image') is-invalid @enderror " id="cover_image"
-                name="cover_image" value="{{ old('cover_image', $progetto->cover_image) }}">
+            <label for="cover_image" class="form-label">Seleziona immagine</label>
+            @if ($progetto->cover_image)
+                <img class="img-thumbnail" src="{{ asset('storage/' . $progetto->cover_image) }}"
+                    alt="{{ $progetto->title }}" />
+            @endif
+            <input type="file" class="form-control @error('cover_image') is-invalid @enderror " id="cover_image"
+                name="cover_image">
             @error('cover_image')
                 <div class="invalid-feedback">
                     {{ $message }}

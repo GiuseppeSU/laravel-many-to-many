@@ -113,6 +113,17 @@ class ProgettoController extends Controller
             return back()->withInput()->withErrors(['slug' => 'Impossibile creare lo slug']);
         }
 
+        if ($request->hasFile('cover_image')) {
+
+            if ($progetto->cover_image) {
+                Storage::delete($progetto->cover_image);
+            }
+
+            $path = Storage::put('cover', $request->cover_image);
+            $validated_data['cover_image'] = $path;
+
+        }
+
         $progetto->technologies()->sync($request->technologies);
 
         $progetto->update($validated_data);
