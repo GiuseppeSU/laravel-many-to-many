@@ -13,4 +13,8 @@
 
     </div>
 
+    @if ($progetto->cover_image)
+        <img class="img-thumbnail" src="{{ asset('storage/' . $progetto->cover_image) }}" alt="{{ $progetto->title }}" />
+    @endif
+
 @endsection

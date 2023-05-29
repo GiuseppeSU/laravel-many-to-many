@@ -9,6 +9,7 @@ use App\Models\Progetto;
 use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 
 class ProgettoController extends Controller
@@ -54,6 +55,13 @@ class ProgettoController extends Controller
         $checkProgetto = Progetto::where('slug', $validated_data['slug'])->first();
         if ($checkProgetto) {
             return back()->withInput()->withErrors(['slug' => 'Impossibile creare lo slug per questo post, cambia il titolo']);
+        }
+
+
+        if ($request->hasFile('cover_image')) {
+            $path = Storage::put('cover', $request->cover_image);
+            $validated_data['cover_image'] = $path;
+
         }
         $newProgetto = Progetto::create($validated_data);
         if ($request->has('technologies')) {
